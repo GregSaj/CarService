@@ -137,40 +137,65 @@ namespace CarService
                             {
                                 case "1":
 
-                                    while (true)
-                                    {
-                                        Console.WriteLine($"Enter sales for product {product1.Id}. You can press A for adding 10, A+ adds 15, B adds 20 and B+ adds 25.");
-                                        var input = Console.ReadLine();
+                                    EnterSales(product1);
 
-                                        if (input == "q")
-                                        {
-                                            break;
-                                        }
-                                        try
-                                        {
-                                            var sells = input;
-                                            product1.AddSells(sells);
+                                    ShowEndStats(product1);
 
-                                        }
-                                        catch (ArgumentException ex)
-                                        {
-                                            Console.WriteLine(ex.Message);
-                                        }
-                                        catch (FormatException ex)
-                                        {
-                                            Console.WriteLine(ex.Message);
-                                        }
-                                    }
+                                    break;
 
-                                    var stats = product1.GetStatistics();
-                                    Console.WriteLine($"Sum: {product1.SellsSum}");
-                                    Console.WriteLine($"High: {stats.SellHigh}");
-                                    Console.WriteLine($"Low: {stats.SellLow}");
-                                    Console.WriteLine($"Average: {stats.SellAverage:F2}");
-                                    Console.WriteLine($"Left: {stats.Left}");
-                                    Console.WriteLine($"Letter: {stats.Letter}");
-                                    Console.WriteLine($"Sum is {product1.ReturnSumFromFile()}");
-                                    Console.WriteLine();
+                                case "2":
+
+                                    EnterSales(product2);
+
+                                    ShowEndStats(product2);
+
+                                    break;
+
+                                case "3":
+
+                                    EnterSales(product3);
+
+                                    ShowEndStats(product3);
+
+                                    break;
+
+                                case "4":
+
+                                    EnterSales(product4);
+
+                                    ShowEndStats(product4);
+
+                                    break;
+
+                                case "5":
+
+                                    EnterSales(product5);
+
+                                    ShowEndStats(product5);
+
+                                    break;
+
+                                case "6":
+
+                                    EnterSales(product6);
+
+                                    ShowEndStats(product6);
+
+                                    break;
+
+                                case "7":
+
+                                    EnterSales(product7);
+
+                                    ShowEndStats(product7);
+
+                                    break;
+
+                                case "8":
+
+                                    EnterSales(product8);
+
+                                    ShowEndStats(product8);
 
                                     break;
 
@@ -180,8 +205,6 @@ namespace CarService
 
                                     break;
                             }
-
-
                         }
 
                         break;
@@ -272,7 +295,6 @@ namespace CarService
 
                                     break;
                             }
-
                         }
 
                         break;
@@ -282,9 +304,52 @@ namespace CarService
                         Console.WriteLine("Wrong key. Try one more time.");
 
                         break;
-
                 }
             }
+        }
+
+        private static void EnterSales(SavedProduct product1)
+        {
+            while (true)
+            {
+                Console.WriteLine($"Enter sales for product {product1.Id}. You can press A for adding 10, A+ adds 15, B adds 20 and B+ adds 25. Q to quit.");
+                var input = Console.ReadLine();
+
+                if (input == "q")
+                {
+                    break;
+                }
+                try
+                {
+                    var sells = input;
+                    product1.AddSells(sells);
+
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                catch (FormatException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+
+        private static void ShowEndStats(SavedProduct product1)
+        {
+            var stats = product1.GetStatistics();
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine($"Here are sales statistics of {product1.Type}:");
+            Console.ResetColor();
+            Console.WriteLine($"Sum: {product1.SellsSum}");
+            Console.WriteLine($"High: {stats.SellHigh}");
+            Console.WriteLine($"Low: {stats.SellLow}");
+            Console.WriteLine($"Average: {stats.SellAverage:F2}");
+            Console.WriteLine($"Left: {stats.Left}");
+            Console.WriteLine($"Letter: {stats.Letter}");
+            Console.WriteLine();
         }
 
         private static void CheckIfFileExistAndAskIfDeleteIt(SavedProduct product1)
@@ -309,7 +374,6 @@ namespace CarService
                         Console.WriteLine($"Invalid format.");
                     }
                 }
-
             }
         }
 
@@ -331,6 +395,10 @@ namespace CarService
         private static void ShowEndStats(InMemoryProduct product1x)
         {
             var stats = product1x.GetStatistics();
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine($"Here are sales statistics of {product1x.Type}:");
+            Console.ResetColor();
             Console.WriteLine($"Sum: {product1x.SellsSum}");
             Console.WriteLine($"High: {stats.SellHigh}");
             Console.WriteLine($"Low: {stats.SellLow}");
@@ -344,7 +412,7 @@ namespace CarService
         {
             while (true)
             {
-                Console.WriteLine($"Enter sales for product {product1x.Id}. You can press A for adding 10, A+ adds 15, B adds 20 and B+ adds 25.");
+                Console.WriteLine($"Enter sales for product {product1x.Id}. You can press A for adding 10, A+ adds 15, B adds 20 and B+ adds 25. Q to quit.");
                 var input = Console.ReadLine();
 
                 if (input == "q")

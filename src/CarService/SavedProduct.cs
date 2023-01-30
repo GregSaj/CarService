@@ -26,7 +26,6 @@ namespace CarService
 
     public class SavedProduct : ProductBase
     {
-
         public const string fileName = "sales.txt";
         public string fullFileName;
 
@@ -50,7 +49,6 @@ namespace CarService
         //     }
         //     // writer.Dispose();
         // }
-
 
         public override Statistics GetStatistics()
         {
@@ -102,7 +100,6 @@ namespace CarService
 
         public override void AddSells(string sells)
         {
-
 
             if (!File.Exists($"{Id}_{Type}_{fileName}"))
             {
@@ -312,9 +309,6 @@ namespace CarService
                 Console.WriteLine($"Id: {Id,-3} Product: {ProductName,-13} Type: {Type,-20} Price: {Price,6:F2} [zł netto/szt.]   Amount: {Amount,7:F2} ");
             }
         }
-
-
     }
-
 }
 

@@ -7,15 +7,14 @@ namespace CarService
 {
 
     public class InMemoryProduct : ProductBase
-    {
-
-        
+    {        
         public List<double> listaSell = new List<double>();
         public override event SellsAddedDelegate SellsAdded;
         public override event SellsAddedDelegate LowSellsAdded;
 
         public InMemoryProduct(int id, string product, string type, double price, int amount) : base(id, product, type, price, amount)
         {
+            
         }
 
         public void ShowProduct()

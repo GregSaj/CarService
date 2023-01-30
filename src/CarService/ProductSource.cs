@@ -22,7 +22,5 @@ namespace CarService
             this.Price = price;
             this.Amount = amount;
         }
-
-
     }
 }

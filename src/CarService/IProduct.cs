@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace CarService
 {
-
     public interface IProduct
     {
         public int Id { get; set; }
@@ -18,5 +17,4 @@ namespace CarService
         public event SellsAddedDelegate SellsAdded;
         public event SellsAddedDelegate LowSellsAdded;
     }
-
 }
