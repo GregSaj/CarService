@@ -114,13 +114,13 @@ namespace CarService
                     {
                         case "A":
 
-                            if (ReturnSumFromFile() + 10 < this.Amount) //trzeba zrobic warunek if file exists wtedy...
+                            if (ReturnSumFromFile() + 10 < this.Amount) 
                             {
                                 using (var writer = File.AppendText($"{Id}_{Type}_{fileName}"))
                                 using (var writer2 = File.AppendText($"audit.txt"))
                                 {
                                     writer.WriteLine(10);
-                                    writer2.WriteLine($"{Id} {Type} - {10}        {DateTime.UtcNow}");
+                                    writer2.WriteLine($"{Id, -5} {Type, -15} - {10}        {DateTime.UtcNow, -20}");
                                     if (SellsAdded != null)
                                     {
                                         SellsAdded(this, new EventArgs());
@@ -141,7 +141,7 @@ namespace CarService
                                 using (var writer2 = File.AppendText($"audit.txt"))
                                 {
                                     writer.WriteLine(15);
-                                    writer2.WriteLine($"{Id} {Type} - {15}        {DateTime.UtcNow}");
+                                    writer2.WriteLine($"{Id, -5} {Type, -15} - {15}        {DateTime.UtcNow, -20}");
                                     if (SellsAdded != null)
                                     {
                                         SellsAdded(this, new EventArgs());
@@ -162,7 +162,7 @@ namespace CarService
                                 using (var writer2 = File.AppendText($"audit.txt"))
                                 {
                                     writer.WriteLine(20);
-                                    writer2.WriteLine($"{Id} {Type} - {20}        {DateTime.UtcNow}");
+                                    writer2.WriteLine($"{Id, -5} {Type, -15} - {20}        {DateTime.UtcNow, -20}");
                                     if (SellsAdded != null)
                                     {
                                         SellsAdded(this, new EventArgs());
@@ -183,7 +183,7 @@ namespace CarService
                                 using (var writer2 = File.AppendText($"audit.txt"))
                                 {
                                     writer.WriteLine(25);
-                                    writer2.WriteLine($"{Id} {Type} - {25}        {DateTime.UtcNow}");
+                                    writer2.WriteLine($"{Id, -5} {Type} - {25, -5}        {DateTime.UtcNow, -20}");
                                     if (SellsAdded != null)
                                     {
                                         SellsAdded(this, new EventArgs());
@@ -211,7 +211,7 @@ namespace CarService
                         using (var writer2 = File.AppendText($"audit.txt"))
                         {
                             writer.WriteLine(stock);
-                            writer2.WriteLine($"{Id} {Type} - {stock}        {DateTime.UtcNow}");
+                            writer2.WriteLine($"{Id, -5} {Type, -15} - {stock, -5}        {DateTime.UtcNow, -20}");
                             if (SellsAdded != null)
                             {
                                 SellsAdded(this, new EventArgs());
@@ -232,7 +232,7 @@ namespace CarService
                         using (var writer2 = File.AppendText($"audit.txt"))
                         {
                             writer.WriteLine(stock);
-                            writer2.WriteLine($"{Id} {Type} - {stock}        {DateTime.UtcNow}");
+                            writer2.WriteLine($"{Id, -5} {Type, -15} - {stock, -5}        {DateTime.UtcNow, -20}");
                             if (SellsAdded != null)
                             {
                                 SellsAdded(this, new EventArgs());

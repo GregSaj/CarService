@@ -352,3 +352,9 @@ MigrationBackup/
 .ionide/
 src/CarService/8_Semi-Syntetic_sales.txt
 src/CarService/5_OC1000_sales.txt
+src/CarService/1_OP520_sales.txt
+src/CarService/audit.txt
+src/CarService/6_OC1002_sales.txt
+src/CarService/7_Syntetic_sales.txt
+src/CarService/audit.txt
+.gitignore
