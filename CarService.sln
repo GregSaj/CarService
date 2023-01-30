@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8799FD78-5FD4-4218-85BA-C2DE24195D77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "carservice", "src\carservice\carservice.csproj", "{3EA27F21-639B-450F-ACC8-4DE2F175D8F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{06807939-EDFA-4E0C-AD9B-604AFF12C3F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "challenge.tests", "test\challenge.tests\challenge.tests.csproj", "{F4E504DF-F677-4A89-9089-25D879032C5A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EA27F21-639B-450F-ACC8-4DE2F175D8F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EA27F21-639B-450F-ACC8-4DE2F175D8F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EA27F21-639B-450F-ACC8-4DE2F175D8F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EA27F21-639B-450F-ACC8-4DE2F175D8F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4E504DF-F677-4A89-9089-25D879032C5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4E504DF-F677-4A89-9089-25D879032C5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4E504DF-F677-4A89-9089-25D879032C5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4E504DF-F677-4A89-9089-25D879032C5A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3EA27F21-639B-450F-ACC8-4DE2F175D8F8} = {8799FD78-5FD4-4218-85BA-C2DE24195D77}
+		{F4E504DF-F677-4A89-9089-25D879032C5A} = {06807939-EDFA-4E0C-AD9B-604AFF12C3F3}
+	EndGlobalSection
+EndGlobal
