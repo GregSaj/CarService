@@ -86,6 +86,7 @@ namespace CarService
             }
 
 
+
             while (true)
             {
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -125,7 +126,7 @@ namespace CarService
                             DisplayListOfProducts(ListofProducts);
 
                             Console.WriteLine("Choose your product by Id: or q to exit.");
-                            var choose1 = Console.ReadLine(); //przy blednym choose wylazi z petli
+                            var choose1 = Console.ReadLine(); 
 
                             if (choose1 == "q" || choose1 == "Q")
                             {
