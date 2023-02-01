@@ -72,11 +72,29 @@ namespace CarService
                     line = reader.ReadLine();
                 }
 
-                result.SellAverage = result.SellsSum / result.Count;
-                result.Left = this.Amount - result.SellsSum;
-                this.SellsSum = result.SellsSum;
+            }
 
+            result.SellAverage = result.SellsSum / result.Count;
+            result.Left = this.Amount - result.SellsSum;
+            this.SellsSum = result.SellsSum;
 
+            switch (result.SellAverage)
+            {
+                case var d when d >= 90:
+                    result.Letter = 'A';
+                    break;
+
+                case var d when d >= 80:
+                    result.Letter = 'B';
+                    break;
+
+                case var d when d >= 60:
+                    result.Letter = 'C';
+                    break;
+
+                default:
+                    result.Letter = 'D';
+                    break;
             }
 
             return result;
@@ -114,13 +132,13 @@ namespace CarService
                     {
                         case "A":
 
-                            if (ReturnSumFromFile() + 10 < this.Amount) 
+                            if (ReturnSumFromFile() + 10 < this.Amount)
                             {
                                 using (var writer = File.AppendText($"{Id}_{Type}_{fileName}"))
                                 using (var writer2 = File.AppendText($"audit.txt"))
                                 {
                                     writer.WriteLine(10);
-                                    writer2.WriteLine($"{Id} {Type, -15} - {10, 3}        {DateTime.UtcNow, -20}");
+                                    writer2.WriteLine($"{Id} {Type,-15} - {10,3}        {DateTime.UtcNow,-20}");
                                     if (SellsAdded != null)
                                     {
                                         SellsAdded(this, new EventArgs());
@@ -141,7 +159,7 @@ namespace CarService
                                 using (var writer2 = File.AppendText($"audit.txt"))
                                 {
                                     writer.WriteLine(15);
-                                    writer2.WriteLine($"{Id} {Type, -15} - {15, 3}        {DateTime.UtcNow, -20}");
+                                    writer2.WriteLine($"{Id} {Type,-15} - {15,3}        {DateTime.UtcNow,-20}");
                                     if (SellsAdded != null)
                                     {
                                         SellsAdded(this, new EventArgs());
@@ -162,7 +180,7 @@ namespace CarService
                                 using (var writer2 = File.AppendText($"audit.txt"))
                                 {
                                     writer.WriteLine(20);
-                                    writer2.WriteLine($"{Id} {Type, -15} - {20, 3}        {DateTime.UtcNow, -20}");
+                                    writer2.WriteLine($"{Id} {Type,-15} - {20,3}        {DateTime.UtcNow,-20}");
                                     if (SellsAdded != null)
                                     {
                                         SellsAdded(this, new EventArgs());
@@ -183,7 +201,7 @@ namespace CarService
                                 using (var writer2 = File.AppendText($"audit.txt"))
                                 {
                                     writer.WriteLine(25);
-                                    writer2.WriteLine($"{Id} {Type, -15} - {25, 3}        {DateTime.UtcNow, -20}");
+                                    writer2.WriteLine($"{Id} {Type,-15} - {25,3}        {DateTime.UtcNow,-20}");
                                     if (SellsAdded != null)
                                     {
                                         SellsAdded(this, new EventArgs());
@@ -211,7 +229,7 @@ namespace CarService
                         using (var writer2 = File.AppendText($"audit.txt"))
                         {
                             writer.WriteLine(stock);
-                            writer2.WriteLine($"{Id} {Type, -15} - {stock, 3}        {DateTime.UtcNow, -20}");
+                            writer2.WriteLine($"{Id} {Type,-15} - {stock,3}        {DateTime.UtcNow,-20}");
                             if (SellsAdded != null)
                             {
                                 SellsAdded(this, new EventArgs());
@@ -232,7 +250,7 @@ namespace CarService
                         using (var writer2 = File.AppendText($"audit.txt"))
                         {
                             writer.WriteLine(stock);
-                            writer2.WriteLine($"{Id} {Type, -15} - {stock, 3}        {DateTime.UtcNow, -20}");
+                            writer2.WriteLine($"{Id} {Type,-15} - {stock,3}        {DateTime.UtcNow,-20}");
                             if (SellsAdded != null)
                             {
                                 SellsAdded(this, new EventArgs());
