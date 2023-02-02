@@ -5,24 +5,7 @@ using System.Linq;
 
 namespace CarService
 {
-    public delegate void SellsAddedDelegate(object sender, EventArgs args);
-
-
-    public abstract class ProductBase : ProductSource, IProduct
-    {
-        public ProductBase(int id, string product, string type, double price, int amount) : base(id, product, type, price, amount)
-        {
-
-        }
-
-        public abstract event SellsAddedDelegate SellsAdded;
-        public abstract event SellsAddedDelegate LowSellsAdded;
-
-        public abstract void AddSells(string sells);
-
-        public abstract Statistics GetStatistics();
-
-    }
+    public delegate void SellsAddedDelegate(object sender, EventArgs args); 
 
     public class SavedProduct : ProductBase
     {
@@ -36,28 +19,9 @@ namespace CarService
 
         public override event SellsAddedDelegate SellsAdded;
         public override event SellsAddedDelegate LowSellsAdded;
-
-        // public override void AddSells(string sells)
-        // {
-        //     using (var writer = File.AppendText($"{Id}_{Type}.txt"))
-        //     {
-        //         writer.WriteLine(sells);
-        //         if (SellsAdded != null)
-        //         {
-        //             SellsAdded(this, new EventArgs());
-        //         }
-        //     }
-        //     // writer.Dispose();
-        // }
-
         public override Statistics GetStatistics()
         {
-            var result = new Statistics();
-            result.Count = 0;
-            result.SellsSum = 0;
-            
-            result.SellHigh = double.MinValue;
-            result.SellLow = double.MaxValue;
+            var result = new Statistics();           
 
             using (var reader = File.OpenText($"{Id}_{Type}_{fileName}"))
             {
@@ -65,17 +29,15 @@ namespace CarService
                 while (line != null)
                 {
                     var number = double.Parse(line);
-                    result.Count++;
-                    result.SellLow = Math.Min(result.SellLow, number);
-                    result.SellHigh = Math.Max(result.SellHigh, number);
-                    result.SellsSum = result.SellsSum + number;
+                    result.AddSells(number);
                     line = reader.ReadLine();
                 }
-            }
-           
-            result.Left = this.Amount - result.SellsSum;
-            this.SellsSum = result.SellsSum;
 
+                
+            }
+
+            result.Left = this.Amount - ReturnSumFromFile();
+                        
             return result;
         }
 
@@ -251,50 +213,7 @@ namespace CarService
                 Console.WriteLine(ex.Message);
             }
         }
-
-        // public override Statistics GetStatistics()
-        // {
-        //     var result = new Statistics();
-        //     result.SellsSum = 0;
-        //     result.SellAverage = 0;
-        //     result.SellHigh = double.MinValue;
-        //     result.SellLow = double.MaxValue;
-
-
-
-
-        //     for (int i = 0; i < listaSell.Count; i++)
-        //     {
-        //         result.SellLow = Math.Min(result.SellLow, listaSell[i]);
-        //         result.SellHigh = Math.Max(result.SellHigh, listaSell[i]);
-        //         result.SellsSum = result.SellsSum + listaSell[i];
-        //     }
-
-        //     result.SellAverage = result.SellsSum / listaSell.Count;
-        //     result.Left = this.Amount - result.SellsSum;
-        //     this.SellsSum = result.SellsSum;
-
-        //     switch (result.SellAverage)
-        //     {
-        //         case var d when d >= 90:
-        //             result.Letter = 'A';
-        //             break;
-
-        //         case var d when d >= 80:
-        //             result.Letter = 'B';
-        //             break;
-
-        //         case var d when d >= 60:
-        //             result.Letter = 'C';
-        //             break;
-
-        //         default:
-        //             result.Letter = 'D';
-        //             break;
-        //     }
-        //     return result;
-        // }
-
+     
         public void ShowProduct()
         {
             if (ProductName == "Oil")

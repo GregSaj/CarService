@@ -5,7 +5,7 @@ namespace CarService
     public class Statistics
     {
         public double SellLow { get; set; }
-        public double SellHigh { get; set; }      
+        public double SellHigh { get; set; }
         public double Left { get; set; }
         public double SellsSum { get; set; }
         public double Count { get; set; }
@@ -14,10 +14,12 @@ namespace CarService
         {
             Count = 0;
             SellsSum = 0;
-            SellHigh = double.MaxValue;
-            SellLow = double.MinValue;
+            SellHigh = double.MinValue;
+            SellLow = double.MaxValue;
 
         }
+
+
 
         public double SellAverage
         {
@@ -55,8 +57,9 @@ namespace CarService
         {
             SellsSum += sells;
             Count += 1;
-            SellHigh = Math.Max(sells, SellLow );
-            SellLow = Math.Min(sells, SellHigh);
+            SellHigh = Math.Max(sells, SellHigh);
+            SellLow = Math.Min(sells, SellLow);
         }
+
     }
 }

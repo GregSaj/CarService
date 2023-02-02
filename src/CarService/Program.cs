@@ -9,9 +9,9 @@ namespace CarService
         static void Main(string[] args)
         {
 
-            Console.BackgroundColor = ConsoleColor.DarkCyan;
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("           ||| Program CarService |||            ");
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine("           ||| Program CarService |||                    ");
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine($"This app alows you to manage sells in your car workshop \nand save it on a file or keep it on your computer memory.");
@@ -85,14 +85,12 @@ namespace CarService
                 Console.WriteLine($"Come on, you can sell more than that!");
             }
 
-
-
             while (true)
             {
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Console.WriteLine("Enter propper key to proceed: ");
                 Console.ResetColor();
-                Console.WriteLine("A) See list of products.\nB) Enter sales and save to file.\nC) Enter sales and keep it in memory.\nQ) Quit program.  ");
+                Console.WriteLine("A) See list of products.\nB) Enter sales and save it to the file .txt.\nC) Enter sales and keep it in memory.\nQ) Quit program.  ");
 
                 var choose = Console.ReadLine();
 
@@ -367,7 +365,6 @@ namespace CarService
                 {
                     var sells = input;
                     product1x.AddSells(sells);
-
                 }
                 catch (ArgumentException ex)
                 {
@@ -387,7 +384,7 @@ namespace CarService
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine($"Here are sales statistics of {product1x.Type}:");
             Console.ResetColor();
-            Console.WriteLine($"Sum: {product1x.SellsSum}");
+            Console.WriteLine($"Sum: {stats.SellsSum}");
             Console.WriteLine($"High: {stats.SellHigh}");
             Console.WriteLine($"Low: {stats.SellLow}");
             Console.WriteLine($"Average: {stats.SellAverage:F2}");
@@ -436,11 +433,5 @@ namespace CarService
                 }
             }
         }
-
-       
-
-       
-
-       
     }
 }
