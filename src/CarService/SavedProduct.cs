@@ -55,7 +55,7 @@ namespace CarService
             var result = new Statistics();
             result.Count = 0;
             result.SellsSum = 0;
-            result.SellAverage = 0;
+            
             result.SellHigh = double.MinValue;
             result.SellLow = double.MaxValue;
 
@@ -71,31 +71,10 @@ namespace CarService
                     result.SellsSum = result.SellsSum + number;
                     line = reader.ReadLine();
                 }
-
             }
-
-            result.SellAverage = result.SellsSum / result.Count;
+           
             result.Left = this.Amount - result.SellsSum;
             this.SellsSum = result.SellsSum;
-
-            switch (result.SellAverage)
-            {
-                case var d when d >= 90:
-                    result.Letter = 'A';
-                    break;
-
-                case var d when d >= 80:
-                    result.Letter = 'B';
-                    break;
-
-                case var d when d >= 60:
-                    result.Letter = 'C';
-                    break;
-
-                default:
-                    result.Letter = 'D';
-                    break;
-            }
 
             return result;
         }

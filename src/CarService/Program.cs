@@ -309,6 +309,22 @@ namespace CarService
             }
         }
 
+              
+        private static void DisplayListOfProducts(List<SavedProduct> ListofProducts)
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine("List of products:");
+            Console.ResetColor();
+
+            foreach (var item in ListofProducts)
+            {
+                item.ShowProduct();
+            }
+
+            Console.WriteLine();
+        }
+              
         private static void EnterSales(SavedProduct product1)
         {
             while (true)
@@ -335,8 +351,51 @@ namespace CarService
                     Console.WriteLine(ex.Message);
                 }
             }
-        }
+        }      
+         private static void EnterSales(InMemoryProduct product1x)
+        {
+            while (true)
+            {
+                Console.WriteLine($"Enter sales for product {product1x.Id}. You can press A for adding 10, A+ adds 15, B adds 20 and B+ adds 25. Q to quit.");
+                var input = Console.ReadLine();
 
+                if (input == "q")
+                {
+                    break;
+                }
+                try
+                {
+                    var sells = input;
+                    product1x.AddSells(sells);
+
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                catch (FormatException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }        
+
+         private static void ShowEndStats(InMemoryProduct product1x)
+        {
+            var stats = product1x.GetStatistics();
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine($"Here are sales statistics of {product1x.Type}:");
+            Console.ResetColor();
+            Console.WriteLine($"Sum: {product1x.SellsSum}");
+            Console.WriteLine($"High: {stats.SellHigh}");
+            Console.WriteLine($"Low: {stats.SellLow}");
+            Console.WriteLine($"Average: {stats.SellAverage:F2}");
+            Console.WriteLine($"Left: {stats.Left}");
+            Console.WriteLine($"Letter: {stats.Letter}");
+            Console.WriteLine();
+        }
+        
         private static void ShowEndStats(SavedProduct product1)
         {
             var stats = product1.GetStatistics();
@@ -378,63 +437,10 @@ namespace CarService
             }
         }
 
-        private static void DisplayListOfProducts(List<SavedProduct> ListofProducts)
-        {
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine("List of products:");
-            Console.ResetColor();
+       
 
-            foreach (var item in ListofProducts)
-            {
-                item.ShowProduct();
-            }
+       
 
-            Console.WriteLine();
-        }
-
-        private static void ShowEndStats(InMemoryProduct product1x)
-        {
-            var stats = product1x.GetStatistics();
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine($"Here are sales statistics of {product1x.Type}:");
-            Console.ResetColor();
-            Console.WriteLine($"Sum: {product1x.SellsSum}");
-            Console.WriteLine($"High: {stats.SellHigh}");
-            Console.WriteLine($"Low: {stats.SellLow}");
-            Console.WriteLine($"Average: {stats.SellAverage:F2}");
-            Console.WriteLine($"Left: {stats.Left}");
-            Console.WriteLine($"Letter: {stats.Letter}");
-            Console.WriteLine();
-        }
-
-        private static void EnterSales(InMemoryProduct product1x)
-        {
-            while (true)
-            {
-                Console.WriteLine($"Enter sales for product {product1x.Id}. You can press A for adding 10, A+ adds 15, B adds 20 and B+ adds 25. Q to quit.");
-                var input = Console.ReadLine();
-
-                if (input == "q")
-                {
-                    break;
-                }
-                try
-                {
-                    var sells = input;
-                    product1x.AddSells(sells);
-
-                }
-                catch (ArgumentException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-                catch (FormatException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-        }
+       
     }
 }

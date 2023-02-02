@@ -250,8 +250,8 @@ namespace CarService
         public override Statistics GetStatistics()
         {
             var result = new Statistics();
-            result.SellsSum = 0;
-            result.SellAverage = 0;
+            result.SellsSum = 0;  
+            result.Count = 0;          
             result.SellHigh = double.MinValue;
             result.SellLow = double.MaxValue;
 
@@ -260,30 +260,12 @@ namespace CarService
                 result.SellLow = Math.Min(result.SellLow, listaSell[i]);
                 result.SellHigh = Math.Max(result.SellHigh, listaSell[i]);
                 result.SellsSum = result.SellsSum + listaSell[i];
+                result.Count++;
             }
-
-            result.SellAverage = result.SellsSum / listaSell.Count;
+            
             result.Left = this.Amount - result.SellsSum;
             this.SellsSum = result.SellsSum;
-
-            switch (result.SellAverage)
-            {
-                case var d when d >= 90:
-                    result.Letter = 'A';
-                    break;
-
-                case var d when d >= 80:
-                    result.Letter = 'B';
-                    break;
-
-                case var d when d >= 60:
-                    result.Letter = 'C';
-                    break;
-
-                default:
-                    result.Letter = 'D';
-                    break;
-            }
+           
             return result;
         }
     }
