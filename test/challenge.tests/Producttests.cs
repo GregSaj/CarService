@@ -4,13 +4,12 @@ namespace challenge.tests;
 public class UnitTest1
 {
     [Fact]
-    public void Test1()
+    public void TestGetStatistics()
     {
         //arrange
         var prod = new InMemoryProduct(15, "AirFilter", "PP670", 56.99, 90);
         prod.AddSells("70");
         prod.AddSells("10");
-        
 
         // act
         var result = prod.GetStatistics();

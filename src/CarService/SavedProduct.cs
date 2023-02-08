@@ -5,12 +5,14 @@ using System.Linq;
 
 namespace CarService
 {
-    public delegate void SellsAddedDelegate(object sender, EventArgs args); 
+    public delegate void SellsAddedDelegate(object sender, EventArgs args);
 
     public class SavedProduct : ProductBase
     {
         public const string fileName = "sales.txt";
         public string fullFileName;
+
+        public bool fileCalculator = false;
 
         public SavedProduct(int id, string product, string type, double price, int amount) : base(id, product, type, price, amount)
         {
@@ -21,7 +23,7 @@ namespace CarService
         public override event SellsAddedDelegate LowSellsAdded;
         public override Statistics GetStatistics()
         {
-            var result = new Statistics();           
+            var result = new Statistics();
 
             using (var reader = File.OpenText($"{Id}_{Type}_{fileName}"))
             {
@@ -33,11 +35,10 @@ namespace CarService
                     line = reader.ReadLine();
                 }
 
-                
             }
 
-            result.Left = this.Amount - ReturnSumFromFile();
-                        
+            result.Left = this.Amount;
+
             return result;
         }
 
@@ -53,6 +54,7 @@ namespace CarService
                     sumFromFile += number;
                     line = reader.ReadLine();
                 }
+
                 return SellsSum = sumFromFile;
             }
         }
@@ -73,7 +75,7 @@ namespace CarService
                     {
                         case "A":
 
-                            if (ReturnSumFromFile() + 10 < this.Amount)
+                            if (10 <= this.Amount)
                             {
                                 using (var writer = File.AppendText($"{Id}_{Type}_{fileName}"))
                                 using (var writer2 = File.AppendText($"audit.txt"))
@@ -84,6 +86,8 @@ namespace CarService
                                     {
                                         SellsAdded(this, new EventArgs());
                                     }
+                                    this.Amount = this.Amount - 10;
+                                    fileCalculator = true;
                                 }
                             }
                             else
@@ -94,7 +98,7 @@ namespace CarService
 
                         case "A+":
 
-                            if (ReturnSumFromFile() + 15 < this.Amount)
+                            if (15 <= this.Amount)
                             {
                                 using (var writer = File.AppendText($"{Id}_{Type}_{fileName}"))
                                 using (var writer2 = File.AppendText($"audit.txt"))
@@ -105,6 +109,8 @@ namespace CarService
                                     {
                                         SellsAdded(this, new EventArgs());
                                     }
+                                    this.Amount = this.Amount - 15;
+                                    fileCalculator = true;
                                 }
                             }
                             else
@@ -115,7 +121,7 @@ namespace CarService
 
                         case "B":
 
-                            if (ReturnSumFromFile() + 20 < this.Amount)
+                            if (20 <= this.Amount)
                             {
                                 using (var writer = File.AppendText($"{Id}_{Type}_{fileName}"))
                                 using (var writer2 = File.AppendText($"audit.txt"))
@@ -126,6 +132,8 @@ namespace CarService
                                     {
                                         SellsAdded(this, new EventArgs());
                                     }
+                                    this.Amount = this.Amount - 20;
+                                    fileCalculator = true;
                                 }
                             }
                             else
@@ -136,7 +144,7 @@ namespace CarService
 
                         case "B+":
 
-                            if (ReturnSumFromFile() + 25 < this.Amount)
+                            if (25 <= this.Amount)
                             {
                                 using (var writer = File.AppendText($"{Id}_{Type}_{fileName}"))
                                 using (var writer2 = File.AppendText($"audit.txt"))
@@ -147,6 +155,8 @@ namespace CarService
                                     {
                                         SellsAdded(this, new EventArgs());
                                     }
+                                    this.Amount = this.Amount - 25;
+                                    fileCalculator = true;
                                 }
                             }
                             else
@@ -162,7 +172,12 @@ namespace CarService
                 }
                 else if (double.TryParse(sells, out double stock))
                 {
-                    if (LowSellsAdded != null && stock < 10 && ReturnSumFromFile() + stock < this.Amount)
+                    if (stock < 0)
+                    {
+                        Console.WriteLine("Sells cannot be less then 0.");
+                        return;
+                    }
+                    if (LowSellsAdded != null && stock < 10 && stock < this.Amount)
                     {
                         LowSellsAdded(this, new EventArgs());
 
@@ -175,13 +190,11 @@ namespace CarService
                             {
                                 SellsAdded(this, new EventArgs());
                             }
+                            this.Amount = this.Amount - stock;
+                            fileCalculator = true;
                         }
-                    }
+                    }                    
                     else if (stock > this.Amount)
-                    {
-                        Console.WriteLine($"You cannot sell at once more then {this.Amount}!");
-                    }
-                    else if (ReturnSumFromFile() + stock > this.Amount)
                     {
                         Console.WriteLine($"You cannot sell more then {this.Amount}!");
                     }
@@ -196,6 +209,8 @@ namespace CarService
                             {
                                 SellsAdded(this, new EventArgs());
                             }
+                            this.Amount = this.Amount - stock;
+                            fileCalculator = true;
                         }
                     }
                 }
@@ -211,18 +226,6 @@ namespace CarService
             catch (ArgumentException ex)
             {
                 Console.WriteLine(ex.Message);
-            }
-        }
-     
-        public void ShowProduct()
-        {
-            if (ProductName == "Oil")
-            {
-                Console.WriteLine($"Id: {Id,-3} Product: {ProductName,-13} Type: {Type,-20} Price: {Price,6:F2} [zł netto/l.]     Amount: {Amount,7:F2}");
-            }
-            else
-            {
-                Console.WriteLine($"Id: {Id,-3} Product: {ProductName,-13} Type: {Type,-20} Price: {Price,6:F2} [zł netto/szt.]   Amount: {Amount,7:F2} ");
             }
         }
     }

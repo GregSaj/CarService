@@ -16,10 +16,8 @@ namespace CarService
             SellsSum = 0;
             SellHigh = double.MinValue;
             SellLow = double.MaxValue;
-
+            
         }
-
-
 
         public double SellAverage
         {
@@ -35,16 +33,14 @@ namespace CarService
             {
                 switch (SellAverage)
                 {
-                    case var d when d >= 90:
+                    case >= 90:
                         return 'A';
 
-                    case var d when d >= 80:
+                    case >= 80:
                         return 'B';
 
-
-                    case var d when d >= 60:
+                    case >= 60:
                         return 'B';
-
 
                     default:
                         return 'D';

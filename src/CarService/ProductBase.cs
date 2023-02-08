@@ -13,7 +13,7 @@ namespace CarService
 
         public abstract void AddSells(string sells);
 
-        public abstract Statistics GetStatistics();
+        public abstract Statistics GetStatistics();        
 
     }
 }

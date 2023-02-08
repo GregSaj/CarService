@@ -16,5 +16,6 @@ namespace CarService
         Statistics GetStatistics();
         public event SellsAddedDelegate SellsAdded;
         public event SellsAddedDelegate LowSellsAdded;
+        public void ShowProduct();
     }
 }
