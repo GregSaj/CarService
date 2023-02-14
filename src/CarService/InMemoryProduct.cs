@@ -51,65 +51,22 @@ namespace CarService
                     switch (sells)
                     {
                         case "A":
-                            if (10 < this.Amount)
-                            {
-                                listaSell.Add(10.00);
-                                sells = "10";
-                                this.Amount = this.Amount - 10;
-                                Console.WriteLine($"Sell {sells} was added to product.");
-                            }
-                            else
-                            {
-                                Console.WriteLine("You cannot sell more than amount.");
-                            }
+                            InnerMethodAddSells(10);
                             break;
 
                         case "A+":
 
-                            if (15 < this.Amount)
-                            {
-
-                                listaSell.Add(15.00);
-                                sells = "15";
-                                this.Amount = this.Amount - 15;
-                                Console.WriteLine($"Sell {sells} was added to product.");
-                            }
-                            else
-                            {
-                                Console.WriteLine("You cannot sell more than amount.");
-                            }
+                            InnerMethodAddSells(15);
                             break;
 
                         case "B":
 
-                            if (20 < this.Amount)
-                            {
-
-                                listaSell.Add(20.00);
-                                sells = "20";
-                                this.Amount = this.Amount - 20;
-                                Console.WriteLine($"Sell {sells} was added to product.");
-                            }
-                            else
-                            {
-                                Console.WriteLine("You cannot sell more than amount.");
-                            }
+                            InnerMethodAddSells(20);
                             break;
 
                         case "B+":
 
-                            if (25 < this.Amount)
-                            {
-
-                                listaSell.Add(25.00);
-                                sells = "25";
-                                this.Amount = this.Amount - 25;
-                                Console.WriteLine($"Sell {sells} was added to product.");
-                            }
-                            else
-                            {
-                                Console.WriteLine("You cannot sell more than amount.");
-                            }
+                            InnerMethodAddSells(25);
                             break;
 
                         default:
@@ -154,6 +111,20 @@ namespace CarService
             catch (ArgumentException ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void InnerMethodAddSells(int A)
+        {            
+            if (A < this.Amount)
+            {
+                listaSell.Add(A);
+                this.Amount = this.Amount - A;
+                Console.WriteLine($"Sell {A} was added to product.");
+            }
+            else
+            {
+                Console.WriteLine("You cannot sell more than amount.");
             }
         }
 

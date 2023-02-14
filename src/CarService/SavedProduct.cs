@@ -75,94 +75,22 @@ namespace CarService
                     {
                         case "A":
 
-                            if (10 <= this.Amount)
-                            {
-                                using (var writer = File.AppendText($"{Id}_{Type}_{fileName}"))
-                                using (var writer2 = File.AppendText($"audit.txt"))
-                                {
-                                    writer.WriteLine(10);
-                                    writer2.WriteLine($"{Id} {Type,-15} - {10,3}        {DateTime.UtcNow,-20}");
-                                    if (SellsAdded != null)
-                                    {
-                                        SellsAdded(this, new EventArgs());
-                                    }
-                                    this.Amount = this.Amount - 10;
-                                    fileCalculator = true;
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("You cannot sell more than amount.");
-                            }
+                            InnerMethodAddSells(10);
                             break;
 
                         case "A+":
 
-                            if (15 <= this.Amount)
-                            {
-                                using (var writer = File.AppendText($"{Id}_{Type}_{fileName}"))
-                                using (var writer2 = File.AppendText($"audit.txt"))
-                                {
-                                    writer.WriteLine(15);
-                                    writer2.WriteLine($"{Id} {Type,-15} - {15,3}        {DateTime.UtcNow,-20}");
-                                    if (SellsAdded != null)
-                                    {
-                                        SellsAdded(this, new EventArgs());
-                                    }
-                                    this.Amount = this.Amount - 15;
-                                    fileCalculator = true;
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("You cannot sell more than amount.");
-                            }
+                            InnerMethodAddSells(15);
                             break;
 
                         case "B":
 
-                            if (20 <= this.Amount)
-                            {
-                                using (var writer = File.AppendText($"{Id}_{Type}_{fileName}"))
-                                using (var writer2 = File.AppendText($"audit.txt"))
-                                {
-                                    writer.WriteLine(20);
-                                    writer2.WriteLine($"{Id} {Type,-15} - {20,3}        {DateTime.UtcNow,-20}");
-                                    if (SellsAdded != null)
-                                    {
-                                        SellsAdded(this, new EventArgs());
-                                    }
-                                    this.Amount = this.Amount - 20;
-                                    fileCalculator = true;
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("You cannot sell more than amount.");
-                            }
+                            InnerMethodAddSells(20);
                             break;
 
                         case "B+":
 
-                            if (25 <= this.Amount)
-                            {
-                                using (var writer = File.AppendText($"{Id}_{Type}_{fileName}"))
-                                using (var writer2 = File.AppendText($"audit.txt"))
-                                {
-                                    writer.WriteLine(25);
-                                    writer2.WriteLine($"{Id} {Type,-15} - {25,3}        {DateTime.UtcNow,-20}");
-                                    if (SellsAdded != null)
-                                    {
-                                        SellsAdded(this, new EventArgs());
-                                    }
-                                    this.Amount = this.Amount - 25;
-                                    fileCalculator = true;
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("You cannot sell more than amount.");
-                            }
+                            InnerMethodAddSells(25);
                             break;
 
                         default:
@@ -226,6 +154,30 @@ namespace CarService
             catch (ArgumentException ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void InnerMethodAddSells(int A)
+        {
+            if (A <= this.Amount)
+            {
+                using (var writer = File.AppendText($"{Id}_{Type}_{fileName}"))
+                using (var writer2 = File.AppendText($"audit.txt"))
+                {
+                    writer.WriteLine(A);
+                    writer2.WriteLine($"{Id} {Type,-15} - {10,3}        {DateTime.UtcNow,-20}");
+                    if (SellsAdded != null)
+                    {
+                        SellsAdded(this, new EventArgs());
+                    }
+                    Console.WriteLine($"Sell {A} was added to product.");
+                    this.Amount = this.Amount - A;
+                    fileCalculator = true;
+                }
+            }
+            else
+            {
+                Console.WriteLine("You cannot sell more than amount.");
             }
         }
     }

@@ -89,14 +89,14 @@ namespace CarService
 
                     case "B" or "b":
 
-                        CheckIfFileExistAndAskIfDeleteItProduct1(product1);
-                        CheckIfFileExistAndAskIfDeleteItProduct2(product2);
-                        CheckIfFileExistAndAskIfDeleteItProduct3(product3);
-                        CheckIfFileExistAndAskIfDeleteItProduct4(product4);
-                        CheckIfFileExistAndAskIfDeleteItProduct5(product5);
-                        CheckIfFileExistAndAskIfDeleteItProduct6(product6);
-                        CheckIfFileExistAndAskIfDeleteItProduct7(product7);
-                        CheckIfFileExistAndAskIfDeleteItProduct7(product8);
+                        CheckIfFileExistAndAskIfDeleteItProduct(product1, 150);
+                        CheckIfFileExistAndAskIfDeleteItProduct(product2, 90);
+                        CheckIfFileExistAndAskIfDeleteItProduct(product3, 50);
+                        CheckIfFileExistAndAskIfDeleteItProduct(product4, 60);
+                        CheckIfFileExistAndAskIfDeleteItProduct(product5, 20);
+                        CheckIfFileExistAndAskIfDeleteItProduct(product6, 18);
+                        CheckIfFileExistAndAskIfDeleteItProduct(product7, 1000);
+                        CheckIfFileExistAndAskIfDeleteItProduct(product8, 1000);
 
                         while (true)
                         {
@@ -292,7 +292,7 @@ namespace CarService
         {
             Console.WriteLine("Choose your product by Id: or q to exit.");
         }
-        private static void CheckIfFileExistAndAskIfDeleteItProduct1(SavedProduct product1)
+        private static void CheckIfFileExistAndAskIfDeleteItProduct(SavedProduct product1, int setBaseAmount)
         {
             if (File.Exists($"{product1.fullFileName}"))
             {
@@ -303,7 +303,7 @@ namespace CarService
                     if (answer1 == "Y" || answer1 == "y")
                     {
                         File.Delete($"{product1.fullFileName}");
-                        product1.Amount = 150;
+                        product1.Amount = setBaseAmount;
 
                         break;
                     }
@@ -337,289 +337,7 @@ namespace CarService
                     }
                 }
             }
-        }
-        private static void CheckIfFileExistAndAskIfDeleteItProduct2(SavedProduct product1)
-        {
-            if (File.Exists($"{product1.fullFileName}"))
-            {
-                Console.WriteLine($"Theres is file {product1.fullFileName} in folder. Do you want to delete it? Y/N");
-                var answer1 = Console.ReadLine();
-                while (true)
-                {
-                    if (answer1 == "Y" || answer1 == "y")
-                    {
-                        File.Delete($"{product1.fullFileName}");
-                        product1.Amount = 90;
-
-                        break;
-                    }
-                    else if (answer1 == "N" || answer1 == "n")
-                    {
-                        double sumFromFile = 0;
-
-                        using (var reader = File.OpenText($"{product1.fullFileName}"))
-                        {
-                            var line = reader.ReadLine();
-                            while (line != null)
-                            {
-                                var number = double.Parse(line);
-                                sumFromFile += number;
-                                line = reader.ReadLine();
-                            }
-
-                            if (!product1.fileCalculator) //jezeli nie ma pliku to nie wchodzi tutaj, nastepnie przy wyborze jest tworzony plik i dodawana jest sells do niego, polecenie zmniejszenia amount w klasie sellsprodcut dziala i potem ponownie uruchumiajac program B wchodzi do wiersza 389
-                            {
-                                product1.Amount = product1.Amount - sumFromFile;
-                                product1.fileCalculator = true;
-                            }
-
-                            break;
-
-                        }
-
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Invalid format.");
-                    }
-                }
-            }
-        }
-        private static void CheckIfFileExistAndAskIfDeleteItProduct3(SavedProduct product1)
-        {
-            if (File.Exists($"{product1.fullFileName}"))
-            {
-                Console.WriteLine($"Theres is file {product1.fullFileName} in folder. Do you want to delete it? Y/N");
-                var answer1 = Console.ReadLine();
-                while (true)
-                {
-                    if (answer1 == "Y" || answer1 == "y")
-                    {
-                        File.Delete($"{product1.fullFileName}");
-                        product1.Amount = 90;
-
-                        break;
-                    }
-                    else if (answer1 == "N" || answer1 == "n")
-                    {
-                        double sumFromFile = 0;
-
-                        using (var reader = File.OpenText($"{product1.fullFileName}"))
-                        {
-                            var line = reader.ReadLine();
-                            while (line != null)
-                            {
-                                var number = double.Parse(line);
-                                sumFromFile += number;
-                                line = reader.ReadLine();
-                            }
-
-                            if (!product1.fileCalculator) //jezeli nie ma pliku to nie wchodzi tutaj, nastepnie przy wyborze jest tworzony plik i dodawana jest sells do niego, polecenie zmniejszenia amount w klasie sellsprodcut dziala i potem ponownie uruchumiajac program B wchodzi do wiersza 389
-                            {
-                                product1.Amount = product1.Amount - sumFromFile;
-                                product1.fileCalculator = true;
-                            }
-
-                            break;
-
-                        }
-
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Invalid format.");
-                    }
-                }
-            }
-        }
-        private static void CheckIfFileExistAndAskIfDeleteItProduct4(SavedProduct product1)
-        {
-            if (File.Exists($"{product1.fullFileName}"))
-            {
-                Console.WriteLine($"Theres is file {product1.fullFileName} in folder. Do you want to delete it? Y/N");
-                var answer1 = Console.ReadLine();
-                while (true)
-                {
-                    if (answer1 == "Y" || answer1 == "y")
-                    {
-                        File.Delete($"{product1.fullFileName}");
-                        product1.Amount = 60;
-
-                        break;
-                    }
-                    else if (answer1 == "N" || answer1 == "n")
-                    {
-                        double sumFromFile = 0;
-
-                        using (var reader = File.OpenText($"{product1.fullFileName}"))
-                        {
-                            var line = reader.ReadLine();
-                            while (line != null)
-                            {
-                                var number = double.Parse(line);
-                                sumFromFile += number;
-                                line = reader.ReadLine();
-                            }
-
-                            if (!product1.fileCalculator) //jezeli nie ma pliku to nie wchodzi tutaj, nastepnie przy wyborze jest tworzony plik i dodawana jest sells do niego, polecenie zmniejszenia amount w klasie sellsprodcut dziala i potem ponownie uruchumiajac program B wchodzi do wiersza 389
-                            {
-                                product1.Amount = product1.Amount - sumFromFile;
-                                product1.fileCalculator = true;
-                            }
-
-                            break;
-
-                        }
-
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Invalid format.");
-                    }
-                }
-            }
-        }
-        private static void CheckIfFileExistAndAskIfDeleteItProduct5(SavedProduct product1)
-        {
-            if (File.Exists($"{product1.fullFileName}"))
-            {
-                Console.WriteLine($"Theres is file {product1.fullFileName} in folder. Do you want to delete it? Y/N");
-                var answer1 = Console.ReadLine();
-                while (true)
-                {
-                    if (answer1 == "Y" || answer1 == "y")
-                    {
-                        File.Delete($"{product1.fullFileName}");
-                        product1.Amount = 20;
-
-                        break;
-                    }
-                    else if (answer1 == "N" || answer1 == "n")
-                    {
-                        double sumFromFile = 0;
-
-                        using (var reader = File.OpenText($"{product1.fullFileName}"))
-                        {
-                            var line = reader.ReadLine();
-                            while (line != null)
-                            {
-                                var number = double.Parse(line);
-                                sumFromFile += number;
-                                line = reader.ReadLine();
-                            }
-
-                            if (!product1.fileCalculator) //jezeli nie ma pliku to nie wchodzi tutaj, nastepnie przy wyborze jest tworzony plik i dodawana jest sells do niego, polecenie zmniejszenia amount w klasie sellsprodcut dziala i potem ponownie uruchumiajac program B wchodzi do wiersza 389
-                            {
-                                product1.Amount = product1.Amount - sumFromFile;
-                                product1.fileCalculator = true;
-                            }
-
-                            break;
-
-                        }
-
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Invalid format.");
-                    }
-                }
-            }
-        }
-        private static void CheckIfFileExistAndAskIfDeleteItProduct6(SavedProduct product1)
-        {
-            if (File.Exists($"{product1.fullFileName}"))
-            {
-                Console.WriteLine($"Theres is file {product1.fullFileName} in folder. Do you want to delete it? Y/N");
-                var answer1 = Console.ReadLine();
-                while (true)
-                {
-                    if (answer1 == "Y" || answer1 == "y")
-                    {
-                        File.Delete($"{product1.fullFileName}");
-                        product1.Amount = 18;
-
-                        break;
-                    }
-                    else if (answer1 == "N" || answer1 == "n")
-                    {
-                        double sumFromFile = 0;
-
-                        using (var reader = File.OpenText($"{product1.fullFileName}"))
-                        {
-                            var line = reader.ReadLine();
-                            while (line != null)
-                            {
-                                var number = double.Parse(line);
-                                sumFromFile += number;
-                                line = reader.ReadLine();
-                            }
-
-                            if (!product1.fileCalculator) //jezeli nie ma pliku to nie wchodzi tutaj, nastepnie przy wyborze jest tworzony plik i dodawana jest sells do niego, polecenie zmniejszenia amount w klasie sellsprodcut dziala i potem ponownie uruchumiajac program B wchodzi do wiersza 389
-                            {
-                                product1.Amount = product1.Amount - sumFromFile;
-                                product1.fileCalculator = true;
-                            }
-
-                            break;
-
-                        }
-
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Invalid format.");
-                    }
-                }
-            }
-        }
-        private static void CheckIfFileExistAndAskIfDeleteItProduct7(SavedProduct product1)
-        {
-            if (File.Exists($"{product1.fullFileName}"))
-            {
-                Console.WriteLine($"Theres is file {product1.fullFileName} in folder. Do you want to delete it? Y/N");
-                var answer1 = Console.ReadLine();
-                while (true)
-                {
-                    if (answer1 == "Y" || answer1 == "y")
-                    {
-                        File.Delete($"{product1.fullFileName}");
-                        product1.Amount = 1000;
-
-                        break;
-                    }
-                    else if (answer1 == "N" || answer1 == "n")
-                    {
-                        double sumFromFile = 0;
-
-                        using (var reader = File.OpenText($"{product1.fullFileName}"))
-                        {
-                            var line = reader.ReadLine();
-                            while (line != null)
-                            {
-                                var number = double.Parse(line);
-                                sumFromFile += number;
-                                line = reader.ReadLine();
-                            }
-
-                            if (!product1.fileCalculator) //jezeli nie ma pliku to nie wchodzi tutaj, nastepnie przy wyborze jest tworzony plik i dodawana jest sells do niego, polecenie zmniejszenia amount w klasie sellsprodcut dziala i potem ponownie uruchumiajac program B wchodzi do wiersza 389
-                            {
-                                product1.Amount = product1.Amount - sumFromFile;
-                                product1.fileCalculator = true;
-                            }
-
-                            break;
-
-                        }
-
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Invalid format.");
-                    }
-                }
-            }
-        }
+        }                       
         private static void DisplayListOfProducts(List<InMemoryProduct> listOfMemorizedProducts)
         {
             Console.WriteLine();
@@ -634,7 +352,7 @@ namespace CarService
 
             Console.WriteLine();
         }
-        private static void DisplayListOfProducts(List<SavedProduct> ListofProducts) 
+        private static void DisplayListOfProducts(List<SavedProduct> ListofProducts)
         {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkBlue;
