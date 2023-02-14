@@ -38,8 +38,8 @@ namespace CarService
             InMemoryProduct product7x = new InMemoryProduct(7, "Oil", "Syntetic", 90.00, 1000);
             InMemoryProduct product8x = new InMemoryProduct(8, "Oil", "Semi-Syntetic", 79.00, 1000);
 
-            var listOfSavedProducts = new List<SavedProduct>() { product1, product2, product3, product4, product5, product6, product7, product8 };
-            var listOfMemorizedProducts = new List<InMemoryProduct>() { product1x, product2x, product3x, product4x, product5x, product6x, product7x, product8x };
+            var listOfSavedProducts = new List<IProduct>() { product1, product2, product3, product4, product5, product6, product7, product8 };
+            var listOfMemorizedProducts = new List<IProduct>() { product1x, product2x, product3x, product4x, product5x, product6x, product7x, product8x };
 
             foreach (var item in listOfSavedProducts)
             {
@@ -306,7 +306,7 @@ namespace CarService
 
             Console.WriteLine();
         }
-        private static void DisplayListOfProducts(List<SavedProduct> ListofProducts)
+        private static void DisplayListOfProducts(List<IProduct> ListofProducts)
         {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkBlue;

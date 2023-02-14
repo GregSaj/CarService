@@ -11,7 +11,6 @@ namespace CarService
     {
         public const string fileName = "sales.txt";
         public string fullFileName;
-
         public bool fileCalculator = false;
 
         public SavedProduct(int id, string product, string type, double price, int amount) : base(id, product, type, price, amount)
@@ -121,7 +120,7 @@ namespace CarService
                             this.Amount = this.Amount - stock;
                             fileCalculator = true;
                         }
-                    }                    
+                    }
                     else if (stock > this.Amount)
                     {
                         Console.WriteLine($"You cannot sell more then {this.Amount}!");
@@ -169,7 +168,7 @@ namespace CarService
                     if (SellsAdded != null)
                     {
                         SellsAdded(this, new EventArgs());
-                    }                    
+                    }
                     this.Amount = this.Amount - A;
                     fileCalculator = true;
                 }
@@ -182,17 +181,20 @@ namespace CarService
 
         public static void CheckIfFileExistAndAskIfDeleteItProduct(SavedProduct product1, int setBaseAmount)
         {
+            bool correctAnswer = true;
+
             if (File.Exists($"{product1.fullFileName}"))
             {
-                Console.WriteLine($"Theres is file {product1.fullFileName} in folder. Do you want to delete it? Y/N");
-                var answer1 = Console.ReadLine();
-                while (true)
+                while (correctAnswer)
                 {
+                    Console.WriteLine($"Theres is file {product1.fullFileName} in folder. Do you want to delete it? Y/N");
+                    var answer1 = Console.ReadLine();
+
                     if (answer1 == "Y" || answer1 == "y")
                     {
                         File.Delete($"{product1.fullFileName}");
                         product1.Amount = setBaseAmount;
-
+                        correctAnswer = false;
                         break;
                     }
                     else if (answer1 == "N" || answer1 == "n")
@@ -214,7 +216,7 @@ namespace CarService
                                 product1.Amount = product1.Amount - sumFromFile;
                                 product1.fileCalculator = true;
                             }
-
+                            correctAnswer = false;
                             break;
                         }
 
@@ -225,7 +227,7 @@ namespace CarService
                     }
                 }
             }
-        }                       
+        }
     }
 }
 
