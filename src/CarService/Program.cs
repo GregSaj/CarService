@@ -292,20 +292,6 @@ namespace CarService
         {
             Console.WriteLine("Choose your product by Id: or q to exit.");
         }
-        private static void DisplayListOfProducts(List<InMemoryProduct> listOfMemorizedProducts)
-        {
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.DarkBlue;
-            Console.WriteLine("List of products:");
-            Console.ResetColor();
-
-            foreach (var item in listOfMemorizedProducts)
-            {
-                item.ShowProduct();
-            }
-
-            Console.WriteLine();
-        }
         private static void DisplayListOfProducts(List<IProduct> ListofProducts)
         {
             Console.WriteLine();
@@ -362,6 +348,5 @@ namespace CarService
             Console.WriteLine($"Letter: {stats.Letter}");
             Console.WriteLine();
         }
-       
     }
 }

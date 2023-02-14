@@ -11,7 +11,7 @@ namespace CarService
         public string Type { get; set; }
         public double Price { get; set; }
         public double Amount { get; set; }
-        public double SellsSum { get; set; }
+       
 
         public ProductSource(int id, string product, string type, double price, int amount)
         {

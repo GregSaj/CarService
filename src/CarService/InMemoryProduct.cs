@@ -16,32 +16,7 @@ namespace CarService
         {
 
         }
-
-        public void ChangeProductAndCheckIfDigit(string newproduct)
-        {
-            bool checkiftrue = true;
-
-            foreach (var item in newproduct)
-            {
-                if (char.IsDigit(item))
-                {
-                    checkiftrue = false;
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.Write($"Can't change. {newproduct} has got digits.");
-                    Console.ResetColor();
-                    break;
-                }
-            }
-
-            if (checkiftrue)
-            {
-                this.ProductName = newproduct;
-                Console.BackgroundColor = ConsoleColor.DarkGreen;
-                Console.Write($"Product has been changed to {newproduct}.");
-                Console.ResetColor();
-            }
-        }
-
+       
         public override void AddSells(string sells)
         {
             try

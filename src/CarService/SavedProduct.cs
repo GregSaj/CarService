@@ -40,24 +40,7 @@ namespace CarService
 
             return result;
         }
-
-        public double ReturnSumFromFile()
-        {
-            double sumFromFile = 0;
-            using (var reader = File.OpenText($"{Id}_{Type}_{fileName}"))
-            {
-                var line = reader.ReadLine();
-                while (line != null)
-                {
-                    var number = double.Parse(line);
-                    sumFromFile += number;
-                    line = reader.ReadLine();
-                }
-
-                return SellsSum = sumFromFile;
-            }
-        }
-
+        
         public override void AddSells(string sells)
         {
 
