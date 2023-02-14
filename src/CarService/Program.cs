@@ -89,14 +89,14 @@ namespace CarService
 
                     case "B" or "b":
 
-                        CheckIfFileExistAndAskIfDeleteItProduct(product1, 150);
-                        CheckIfFileExistAndAskIfDeleteItProduct(product2, 90);
-                        CheckIfFileExistAndAskIfDeleteItProduct(product3, 50);
-                        CheckIfFileExistAndAskIfDeleteItProduct(product4, 60);
-                        CheckIfFileExistAndAskIfDeleteItProduct(product5, 20);
-                        CheckIfFileExistAndAskIfDeleteItProduct(product6, 18);
-                        CheckIfFileExistAndAskIfDeleteItProduct(product7, 1000);
-                        CheckIfFileExistAndAskIfDeleteItProduct(product8, 1000);
+                        SavedProduct.CheckIfFileExistAndAskIfDeleteItProduct(product1, 150);
+                        SavedProduct.CheckIfFileExistAndAskIfDeleteItProduct(product2, 90);
+                        SavedProduct.CheckIfFileExistAndAskIfDeleteItProduct(product3, 50);
+                        SavedProduct.CheckIfFileExistAndAskIfDeleteItProduct(product4, 60);
+                        SavedProduct.CheckIfFileExistAndAskIfDeleteItProduct(product5, 20);
+                        SavedProduct.CheckIfFileExistAndAskIfDeleteItProduct(product6, 18);
+                        SavedProduct.CheckIfFileExistAndAskIfDeleteItProduct(product7, 1000);
+                        SavedProduct.CheckIfFileExistAndAskIfDeleteItProduct(product8, 1000);
 
                         while (true)
                         {
@@ -292,52 +292,6 @@ namespace CarService
         {
             Console.WriteLine("Choose your product by Id: or q to exit.");
         }
-        private static void CheckIfFileExistAndAskIfDeleteItProduct(SavedProduct product1, int setBaseAmount)
-        {
-            if (File.Exists($"{product1.fullFileName}"))
-            {
-                Console.WriteLine($"Theres is file {product1.fullFileName} in folder. Do you want to delete it? Y/N");
-                var answer1 = Console.ReadLine();
-                while (true)
-                {
-                    if (answer1 == "Y" || answer1 == "y")
-                    {
-                        File.Delete($"{product1.fullFileName}");
-                        product1.Amount = setBaseAmount;
-
-                        break;
-                    }
-                    else if (answer1 == "N" || answer1 == "n")
-                    {
-                        double sumFromFile = 0;
-
-                        using (var reader = File.OpenText($"{product1.fullFileName}"))
-                        {
-                            var line = reader.ReadLine();
-                            while (line != null)
-                            {
-                                var number = double.Parse(line);
-                                sumFromFile += number;
-                                line = reader.ReadLine();
-                            }
-
-                            if (!product1.fileCalculator)
-                            {
-                                product1.Amount = product1.Amount - sumFromFile;
-                                product1.fileCalculator = true;
-                            }
-
-                            break;
-                        }
-
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Invalid format.");
-                    }
-                }
-            }
-        }                       
         private static void DisplayListOfProducts(List<InMemoryProduct> listOfMemorizedProducts)
         {
             Console.WriteLine();
@@ -408,52 +362,6 @@ namespace CarService
             Console.WriteLine($"Letter: {stats.Letter}");
             Console.WriteLine();
         }
-        private static void CheckIfFileExistAndAskIfDeleteIt(SavedProduct product1)
-        {
-            if (File.Exists($"{product1.fullFileName}"))
-            {
-                Console.WriteLine($"Theres is file {product1.fullFileName} in folder. Do you want to delete it? Y/N");
-                var answer1 = Console.ReadLine();
-                while (true)
-                {
-                    if (answer1 == "Y" || answer1 == "y")
-                    {
-                        File.Delete($"{product1.fullFileName}");
-
-
-                        break;
-                    }
-                    else if (answer1 == "N" || answer1 == "n")
-                    {
-                        double sumFromFile = 0;
-
-                        using (var reader = File.OpenText($"{product1.fullFileName}"))
-                        {
-                            var line = reader.ReadLine();
-                            while (line != null)
-                            {
-                                var number = double.Parse(line);
-                                sumFromFile += number;
-                                line = reader.ReadLine();
-                            }
-
-                            if (!product1.fileCalculator) //jezeli nie ma pliku to nie wchodzi tutaj, nastepnie przy wyborze jest tworzony plik i dodawana jest sells do niego, polecenie zmniejszenia amount w klasie sellsprodcut dziala i potem ponownie uruchumiajac program B wchodzi do wiersza 389
-                            {
-                                product1.Amount = product1.Amount - sumFromFile;
-                                product1.fileCalculator = true;
-                            }
-
-                            break;
-
-                        }
-
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Invalid format.");
-                    }
-                }
-            }
-        }
+       
     }
 }

@@ -169,8 +169,7 @@ namespace CarService
                     if (SellsAdded != null)
                     {
                         SellsAdded(this, new EventArgs());
-                    }
-                    Console.WriteLine($"Sell {A} was added to product.");
+                    }                    
                     this.Amount = this.Amount - A;
                     fileCalculator = true;
                 }
@@ -180,6 +179,53 @@ namespace CarService
                 Console.WriteLine("You cannot sell more than amount.");
             }
         }
+
+        public static void CheckIfFileExistAndAskIfDeleteItProduct(SavedProduct product1, int setBaseAmount)
+        {
+            if (File.Exists($"{product1.fullFileName}"))
+            {
+                Console.WriteLine($"Theres is file {product1.fullFileName} in folder. Do you want to delete it? Y/N");
+                var answer1 = Console.ReadLine();
+                while (true)
+                {
+                    if (answer1 == "Y" || answer1 == "y")
+                    {
+                        File.Delete($"{product1.fullFileName}");
+                        product1.Amount = setBaseAmount;
+
+                        break;
+                    }
+                    else if (answer1 == "N" || answer1 == "n")
+                    {
+                        double sumFromFile = 0;
+
+                        using (var reader = File.OpenText($"{product1.fullFileName}"))
+                        {
+                            var line = reader.ReadLine();
+                            while (line != null)
+                            {
+                                var number = double.Parse(line);
+                                sumFromFile += number;
+                                line = reader.ReadLine();
+                            }
+
+                            if (!product1.fileCalculator)
+                            {
+                                product1.Amount = product1.Amount - sumFromFile;
+                                product1.fileCalculator = true;
+                            }
+
+                            break;
+                        }
+
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Invalid format.");
+                    }
+                }
+            }
+        }                       
     }
 }
 
