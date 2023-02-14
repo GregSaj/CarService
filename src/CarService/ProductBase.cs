@@ -10,9 +10,7 @@ namespace CarService
 
         public abstract event SellsAddedDelegate SellsAdded;
         public abstract event SellsAddedDelegate LowSellsAdded;
-
         public abstract void AddSells(string sells);
-
         public abstract Statistics GetStatistics();        
 
     }

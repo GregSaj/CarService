@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace CarService
 {
-
     public class InMemoryProduct : ProductBase
     {
         public List<double> listaSell = new List<double>();
